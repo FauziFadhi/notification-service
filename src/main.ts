@@ -5,6 +5,7 @@ import { satisfies } from 'semver';
 import { ConfigService } from '@nestjs/config';
 import { CustomValidationPipe } from '@utils/pipes';
 import { VersioningType } from '@nestjs/common';
+import { AllExceptionsFilter } from '@utils/filters';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,6 +17,8 @@ async function bootstrap() {
     );
     process.exit(1);
   }
+
+  app.useGlobalFilters(new AllExceptionsFilter());
 
   app.useGlobalPipes(
     new CustomValidationPipe({
