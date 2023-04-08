@@ -48,7 +48,7 @@ export class UserService {
       name: 'Kassi Vinker',
       email: 'kvinker5@slate.com',
       notifChannels: ['ui', 'email'],
-      companyId: 2,
+      companyId: 3,
     },
   ];
 

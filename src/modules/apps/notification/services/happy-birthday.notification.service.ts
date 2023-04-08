@@ -6,7 +6,7 @@ import { intersection } from 'lodash';
 import {
   INotification,
   NotificationDTO,
-} from './interfaces/notification.interface';
+} from './interfaces/notification-factory.interface';
 
 @Injectable()
 export class HappyBirthdayNotificationService

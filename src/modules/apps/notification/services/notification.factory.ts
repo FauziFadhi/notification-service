@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { ENotificationType } from '../notification.enum';
 import { HappyBirthdayNotificationService } from './happy-birthday.notification.service';
-import { INotification } from './interfaces/notification.interface';
+import { INotification } from './interfaces/notification-factory.interface';
 import { LeaveBalanceNotificationService } from './leave-balance.notification.service';
 import { MonthlyPaymentSlipNotificationService } from './mothly-payment-slip.notification.service';
 
