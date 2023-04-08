@@ -4,15 +4,20 @@ import {
   ENotificationChannel,
   INotificationChannel,
 } from './interfaces/notification.channel.interface';
+import { UINotificationChannel } from './ui/services/ui.notification-channel.service';
 
 @Injectable()
 export class NotificationChannelFactory {
-  constructor(private readonly emailChannel: EmailNotificationChannel) {}
+  constructor(
+    private readonly emailChannel: EmailNotificationChannel,
+    private readonly uiChannel: UINotificationChannel,
+  ) {}
   private notificationChannels: Record<
     ENotificationChannel,
     INotificationChannel
   > = {
     [ENotificationChannel.Email]: this.emailChannel,
+    [ENotificationChannel.UI]: this.uiChannel,
   };
 
   getService(channel: ENotificationChannel): INotificationChannel {
