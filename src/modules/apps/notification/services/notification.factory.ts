@@ -11,13 +11,15 @@ export class NotificationFactory {
     private readonly happyBirthdayService: HappyBirthdayNotificationService,
     private readonly monthlyPaymentSlipService: MonthlyPaymentSlipNotificationService,
     private readonly leaveBalanceService: LeaveBalanceNotificationService,
-  ) {}
+  ) {
+    this.notificationType = {
+      [ENotificationType.HappyBirthday]: this.happyBirthdayService,
+      [ENotificationType.LeaveBalanceReminder]: this.leaveBalanceService,
+      [ENotificationType.MonthlyPayslip]: this.monthlyPaymentSlipService,
+    };
+  }
 
-  private notificationType: Record<ENotificationType, INotification<any>> = {
-    [ENotificationType.HappyBirthday]: this.happyBirthdayService,
-    [ENotificationType.LeaveBalanceReminder]: this.leaveBalanceService,
-    [ENotificationType.MonthlyPayslip]: this.monthlyPaymentSlipService,
-  };
+  private notificationType: Record<ENotificationType, INotification<any>>;
 
   setType(type: ENotificationType): INotification<any> {
     const notificationByType = this.notificationType[type];

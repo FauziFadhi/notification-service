@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { ENotificationChannel } from 'src/modules/middleware/notification-channel/interfaces/notification.channel.interface';
-import { NotificationChannelFactory } from 'src/modules/middleware/notification-channel/notification.channel.factory';
+import { ENotificationChannel } from '@modules/middleware/notification-channel/interfaces/notification.channel.interface';
+import { NotificationChannelFactory } from '@modules/middleware/notification-channel/notification.channel.factory';
 import { ENotificationType } from '../notification.enum';
 import { intersection } from 'lodash';
 import {
