@@ -9,8 +9,10 @@ interface IContact {
 }
 
 export interface INotificationChannelDTO {
+  type: string;
   contact: IContact;
   params: unknown;
+  attachmentNames?: string[];
 }
 
 export interface INotificationChannel {
