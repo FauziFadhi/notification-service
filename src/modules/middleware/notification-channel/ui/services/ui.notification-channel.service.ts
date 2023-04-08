@@ -6,7 +6,7 @@ import {
 
 @Injectable()
 export class UINotificationChannel implements INotificationChannel {
-  send(dto: INotificationChannelDTO): Promise<any> {
+  async send(dto: INotificationChannelDTO): Promise<any> {
     console.log('send ui notification', dto.type);
 
     // TODO: storing notif for list notif

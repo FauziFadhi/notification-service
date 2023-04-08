@@ -3,7 +3,7 @@ import { NotificationChannelModule } from 'src/modules/middleware/notification-c
 import { HappyBirthdayNotificationService } from './services/happy-birthday.notification.service';
 import { LeaveBalanceNotificationService } from './services/leave-balance.notification.service';
 import { MonthlyPaymentSlipNotificationService } from './services/mothly-payment-slip.notification.service';
-import { NotificationFactory } from './services/notification.service';
+import { NotificationFactory } from './services/notification.factory';
 
 @Module({
   imports: [NotificationChannelModule],

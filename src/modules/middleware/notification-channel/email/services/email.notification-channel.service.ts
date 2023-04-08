@@ -6,7 +6,7 @@ import {
 
 @Injectable()
 export class EmailNotificationChannel implements INotificationChannel {
-  send(dto: INotificationChannelDTO): Promise<any> {
+  async send(dto: INotificationChannelDTO): Promise<any> {
     console.log('send email notification', dto.type);
   }
 }
