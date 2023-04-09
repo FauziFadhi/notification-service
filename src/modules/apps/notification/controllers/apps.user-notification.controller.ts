@@ -11,6 +11,6 @@ export class AppsUserNotificationController {
   async sendNotif(@Param('userId') userId: number) {
     const userNotifications =
       await this.notificationService.getUserNotifications(userId);
-    return transformer(AppsUserNotificationVm, userNotifications);
+    return { data: transformer(AppsUserNotificationVm, userNotifications) };
   }
 }
