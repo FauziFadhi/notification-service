@@ -17,8 +17,8 @@ export class MongoConfigProvider implements MongooseOptionsFactory {
     return {
       uri: mongoConfig.url,
       dbName: 'notification',
-      autoCreate: false,
-      autoIndex: false,
+      autoCreate: true,
+      autoIndex: true,
     };
   }
 }
