@@ -75,7 +75,8 @@
     "moduleNameMapper": {
       "^@utils/(.*)$": "<rootDir>/utils/$1",
       "^@config/(.*)$": "<rootDir>/configs/$1",
-      "^@modules/(.*)$": "<rootDir>/modules/$1"
+      "^@modules/(.*)$": "<rootDir>/modules/$1",
+      "^@models/(.*)$": "<rootDir>/models/$1"
     },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"

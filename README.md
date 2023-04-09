@@ -1,73 +1,125 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+### LINK
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+[assement test](#https://docs.google.com/document/d/1d-Qjaw6hs6lZxiNxWTpPD2EeRXyIoH4q/edit)
+[postman](#https://documenter.getpostman.com/view/4219273/2s93XsY66g)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# How to run
+- ## With docker
+1. Get in to root folder of this project
+2. make an `.env` file in the root folder `PORT=3000` AND `DB_MONGO_URL=mongodb://mongodb:27017`
+3. run command `docker-compose up -d --build`
 
-## Description
+- ## With npm command
+1. get in to root folder
+2. run command `npm install`
+3. make sure you have nodejs minimal version `18.14`
+4. run your mongodb
+5. make an `.env` file in the root folder `PORT=3000` AND `DB_MONGO_URL=mongodb://localhost:27017`
+6. run command `npm run start:dev`
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+# Folder structure
+- src
+- - configs `folder for define config of all dependencies`
+- - - mongo `config of mongodb example mongodbUrl`
+- - microservices `dummies module from other services`
+- - - account-service `dummies data from account service`
+- - - company-service `dummies data from company service`
+- - models `list all models from orm`
+- - - mongo `list of models from mongodb orm`
+- - modules `list all business logic modules`
+- - - apps `list of modules for apps platform`
+- - - - notifications `list of service for notifications modules`
+- - - middleware `list of modules for 3rd party middleware`
+- - - - notification-channel `list of 3rd part for sending data notification based on channel`
+- - utils `list all of helper based on context`
 
-```bash
-$ npm install
-```
+---
 
-## Running the app
+# NOTIFICATIONS CHANNEL MODULE (src -> modules -> notification-channel)
+the purpose of this module is to have every implementation based on each 3rd party that we have for notification channel, because we have multiple channel we need to force each implementation to have same arguments list.
 
-```bash
-# development
-$ npm run start
+`notification.channel.interface.ts` is an interface file that need to be implemented by all notification channel service.
 
-# watch mode
-$ npm run start:dev
+after that we have `notification.channel.factory.ts` for a gateway for other service to access the channel. this file will distribute the channel based on argument that provider from the accessor
 
-# production mode
-$ npm run start:prod
-```
+if you want to create new channel, create new folder with channel name, and make `module` based on its name and create new `service` that implemented the `interface`.
+after that import this new channel module file to root module of this `notification channel module`. and add new `key` and the `value` inside the dictionary object in `notification.channel.factory` constructor.
 
-## Test
 
-```bash
-# unit tests
-$ npm run test
+# NOTIFICATION MODULE (src -> apps -> notification)
+this module purpose is to implementing notification on business logic.
+we have `notification.factory` as a gateway to distribute a `notification type` to it's `notification type service class`
 
-# e2e tests
-$ npm run test:e2e
+if you want to add another notification type. you should create new class and implement `INotification` interface inside `notification-factory.interface.ts` file,
+and then define supported channel for your new notification type as private attribute inside that class. and implement `INotification` `send` function. inside that function call all the `supported channels` that have `intersection` with `user subscribed channels`
 
-# test coverage
-$ npm run test:cov
-```
 
-## Support
+# Company List
+```typescript 
+companies = [
+    {
+      id: 1,
+      name: 'Skiba',
+      notifChannels: ['ui'],
+    },
+    {
+      id: 2,
+      name: 'Kazu',
+      notifChannels: ['email'],
+    },
+    {
+      id: 3,
+      name: 'Skinder',
+      notifChannels: ['ui', 'email'],
+    },
+  ];
+  ```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+  # User List
+  ```typescript
+  users = [
+    {
+      id: 1,
+      name: 'Dionysus Andrioletti',
+      email: 'dandrioletti0@ucoz.com',
+      notifChannels: ['ui'],
+      companyId: 1,
+    },
+    {
+      id: 2,
+      name: 'Lucille Douce',
+      email: 'ldouce1@newsvine.com',
+      notifChannels: ['ui'],
+      companyId: 1,
+    },
+    {
+      id: 3,
+      name: 'Melloney Rachuig',
+      email: 'mrachuig2@cpanel.net',
+      notifChannels: ['email'],
+      companyId: 3,
+    },
+    {
+      id: 4,
+      name: 'Brand Risso',
+      email: 'brisso3@google.com',
+      notifChannels: ['ui', 'email'],
+      companyId: 1,
+    },
+    {
+      id: 5,
+      name: 'Neda Tench',
+      email: 'ntench4@nba.com',
+      notifChannels: ['ui', 'email'],
+      companyId: 2,
+    },
+    {
+      id: 6,
+      name: 'Kassi Vinker',
+      email: 'kvinker5@slate.com',
+      notifChannels: ['ui', 'email'],
+      companyId: 3,
+    },
+  ];
+  ```
