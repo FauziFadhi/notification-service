@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import {
   UserNotification,
   UserNotificationSchema,
-} from 'src/models/mongo/user-notification';
+} from '@models/mongo/user-notification';
 import { UINotificationChannel } from './services/ui.notification-channel.service';
 
 @Module({

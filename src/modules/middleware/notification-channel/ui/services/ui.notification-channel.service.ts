@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import {
   UserNotification,
   UserNotificationDocument,
-} from 'src/models/mongo/user-notification';
+} from '@models/mongo/user-notification';
 import { Model } from 'mongoose';
 
 import {
