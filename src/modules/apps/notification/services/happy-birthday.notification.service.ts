@@ -12,7 +12,7 @@ import {
 export class HappyBirthdayNotificationService
   implements INotification<ENotificationType.HappyBirthday>
 {
-  private channels = [ENotificationChannel.Email, ENotificationChannel.UI];
+  readonly channels = [ENotificationChannel.Email, ENotificationChannel.UI];
   constructor(
     private readonly notificationChannelFactory: NotificationChannelFactory,
   ) {}

@@ -36,6 +36,7 @@ export type NotificationDTO<type extends ENotificationType> = {
   : never);
 
 export interface INotification<type extends ENotificationType> {
+  readonly channels: ENotificationChannel[];
   send(
     dto: NotificationDTO<type>,
     subscribedChannels: ENotificationChannel[],
