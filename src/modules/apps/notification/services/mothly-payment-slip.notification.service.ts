@@ -12,7 +12,7 @@ import {
 export class MonthlyPaymentSlipNotificationService
   implements INotification<ENotificationType.MonthlyPayslip>
 {
-  private channels = [ENotificationChannel.Email];
+  readonly channels = [ENotificationChannel.Email];
   constructor(
     private readonly notificationChannelFactory: NotificationChannelFactory,
   ) {}

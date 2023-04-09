@@ -12,7 +12,7 @@ import {
 export class LeaveBalanceNotificationService
   implements INotification<ENotificationType.LeaveBalanceReminder>
 {
-  private channels = [ENotificationChannel.UI];
+  readonly channels = [ENotificationChannel.UI];
   constructor(
     private readonly notificationChannelFactory: NotificationChannelFactory,
   ) {}
