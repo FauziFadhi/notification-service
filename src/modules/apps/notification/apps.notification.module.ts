@@ -5,7 +5,7 @@ import { CompanyModule } from 'src/microservices/company-service/company.module'
 import {
   UserNotification,
   UserNotificationSchema,
-} from 'src/models/mongo/user-notification';
+} from '@models/mongo/user-notification';
 import { NotificationChannelModule } from 'src/modules/middleware/notification-channel/notification.channel.module';
 import { AppsNotificationController } from './controllers/apps.notification.controller';
 import { AppsUserNotificationController } from './controllers/apps.user-notification.controller';

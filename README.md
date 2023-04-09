@@ -53,3 +53,73 @@ we have `notification.factory` as a gateway to distribute a `notification type` 
 
 if you want to add another notification type. you should create new class and implement `INotification` interface inside `notification-factory.interface.ts` file,
 and then define supported channel for your new notification type as private attribute inside that class. and implement `INotification` `send` function. inside that function call all the `supported channels` that have `intersection` with `user subscribed channels`
+
+
+# Company List
+```typescript 
+companies = [
+    {
+      id: 1,
+      name: 'Skiba',
+      notifChannels: ['ui'],
+    },
+    {
+      id: 2,
+      name: 'Kazu',
+      notifChannels: ['email'],
+    },
+    {
+      id: 3,
+      name: 'Skinder',
+      notifChannels: ['ui', 'email'],
+    },
+  ];
+  ```
+
+  # User List
+  ```typescript
+  users = [
+    {
+      id: 1,
+      name: 'Dionysus Andrioletti',
+      email: 'dandrioletti0@ucoz.com',
+      notifChannels: ['ui'],
+      companyId: 1,
+    },
+    {
+      id: 2,
+      name: 'Lucille Douce',
+      email: 'ldouce1@newsvine.com',
+      notifChannels: ['ui'],
+      companyId: 1,
+    },
+    {
+      id: 3,
+      name: 'Melloney Rachuig',
+      email: 'mrachuig2@cpanel.net',
+      notifChannels: ['email'],
+      companyId: 3,
+    },
+    {
+      id: 4,
+      name: 'Brand Risso',
+      email: 'brisso3@google.com',
+      notifChannels: ['ui', 'email'],
+      companyId: 1,
+    },
+    {
+      id: 5,
+      name: 'Neda Tench',
+      email: 'ntench4@nba.com',
+      notifChannels: ['ui', 'email'],
+      companyId: 2,
+    },
+    {
+      id: 6,
+      name: 'Kassi Vinker',
+      email: 'kvinker5@slate.com',
+      notifChannels: ['ui', 'email'],
+      companyId: 3,
+    },
+  ];
+  ```
