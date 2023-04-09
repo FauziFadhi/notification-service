@@ -1,4 +1,11 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import {
+  UserNotification,
+  UserNotificationDocument,
+} from 'src/models/mongo/user-notification';
+import { Model } from 'mongoose';
+
 import {
   INotificationChannel,
   INotificationChannelDTO,
@@ -6,9 +13,22 @@ import {
 
 @Injectable()
 export class UINotificationChannel implements INotificationChannel {
+  constructor(
+    @InjectModel(UserNotification.name)
+    private userNotifModel: Model<UserNotificationDocument>,
+  ) {}
   async send(dto: INotificationChannelDTO): Promise<any> {
     console.log('send ui notification', dto.type);
 
-    // TODO: storing notif for list notif
+    this.userNotifModel
+      .create({
+        title: 'template title',
+        content: 'template content',
+        params: dto.params,
+        userId: dto.contact.userId,
+      })
+      .catch(() => {
+        console.log('failed storing ui notification', dto.type);
+      });
   }
 }
