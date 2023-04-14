@@ -61,20 +61,17 @@ export class NotificationService {
         return this.sendBirthdayNotif({
           user,
           company,
-          type: dto.type,
           subscribedChannels,
         });
 
       case ENotificationType.LeaveBalanceReminder:
         return await this.sendLeaveBalanceLeaveReminderNotif({
-          type: dto.type,
           user,
           subscribedChannels,
         });
 
       case ENotificationType.MonthlyPayslip:
         return await this.sendMonthlyPayslipNotif({
-          type: dto.type,
           user,
           subscribedChannels,
         });
@@ -84,10 +81,10 @@ export class NotificationService {
     }
   }
 
-  getUser;
-
   private async sendBirthdayNotif(dto: ISendBirthdayNotifDTO) {
-    const notif = this.notificationFactory.setType(dto.type);
+    const notif = this.notificationFactory.setType(
+      ENotificationType.HappyBirthday,
+    );
 
     return notif.send(
       {
@@ -107,7 +104,9 @@ export class NotificationService {
   private async sendLeaveBalanceLeaveReminderNotif(
     dto: ISendLeaveBalanceNotifDTO,
   ) {
-    const notif = this.notificationFactory.setType(dto.type);
+    const notif = this.notificationFactory.setType(
+      ENotificationType.LeaveBalanceReminder,
+    );
 
     return notif.send(
       {
@@ -116,7 +115,7 @@ export class NotificationService {
           email: dto.user.email,
         },
         params: {
-          date: '2023-12-11',
+          date: '2023-09-10',
         },
       },
       dto.subscribedChannels,
@@ -124,7 +123,9 @@ export class NotificationService {
   }
 
   private async sendMonthlyPayslipNotif(dto: ISendMonthlyPayslipNotifDTO) {
-    const notif = this.notificationFactory.setType(dto.type);
+    const notif = this.notificationFactory.setType(
+      ENotificationType.MonthlyPayslip,
+    );
 
     notif.send(
       {

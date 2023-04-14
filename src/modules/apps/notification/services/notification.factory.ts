@@ -21,7 +21,7 @@ export class NotificationFactory {
 
   private notificationType: Record<ENotificationType, INotification<any>>;
 
-  setType(type: ENotificationType): INotification<any> {
+  setType<T extends ENotificationType>(type: T): INotification<T> {
     const notificationByType = this.notificationType[type];
 
     if (!notificationByType) {
