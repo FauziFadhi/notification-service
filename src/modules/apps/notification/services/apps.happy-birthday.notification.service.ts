@@ -6,18 +6,18 @@ import { intersection } from 'lodash';
 import {
   INotification,
   NotificationDTO,
-} from './interfaces/notification-factory.interface';
+} from './interfaces/apps.notification-factory.interface';
 
 @Injectable()
-export class MonthlyPaymentSlipNotificationService
-  implements INotification<ENotificationType.MonthlyPayslip>
+export class AppsHappyBirthdayNotificationService
+  implements INotification<ENotificationType.HappyBirthday>
 {
-  readonly channels = [ENotificationChannel.Email];
+  readonly channels = [ENotificationChannel.Email, ENotificationChannel.UI];
   constructor(
     private readonly notificationChannelFactory: NotificationChannelFactory,
   ) {}
   async send(
-    dto: NotificationDTO<ENotificationType.MonthlyPayslip>,
+    dto: NotificationDTO<ENotificationType.HappyBirthday>,
     subscribedChannels: ENotificationChannel[],
   ): Promise<any> {
     const usedChannel: ENotificationChannel[] = intersection(
@@ -31,7 +31,7 @@ export class MonthlyPaymentSlipNotificationService
           this.notificationChannelFactory.getService(channel);
 
         channelService.send({
-          type: ENotificationType.MonthlyPayslip,
+          type: ENotificationType.HappyBirthday,
           contact: dto.contact,
           params: dto.params,
         });

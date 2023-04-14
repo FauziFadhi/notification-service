@@ -11,9 +11,9 @@ import {
   ISendLeaveBalanceNotifDTO,
   ISendMonthlyPayslipNotifDTO,
   ISendNotifDTO,
-} from './interfaces/notification.interface';
+} from './interfaces/apps.notification.interface';
 import { intersection } from 'lodash';
-import { NotificationFactory } from './notification.factory';
+import { AppsNotificationFactory } from './apps.notification.factory';
 import { ENotificationType } from '../notification.enum';
 
 import { InjectModel } from '@nestjs/mongoose';
@@ -24,9 +24,9 @@ import {
 import { Model } from 'mongoose';
 
 @Injectable()
-export class NotificationService {
+export class AppsNotificationService {
   constructor(
-    private readonly notificationFactory: NotificationFactory,
+    private readonly notificationFactory: AppsNotificationFactory,
     @InjectModel(UserNotification.name)
     private userNotifModel: Model<UserNotificationDocument>,
     private readonly userService: UserService,

@@ -1,16 +1,16 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { ENotificationType } from '../notification.enum';
-import { HappyBirthdayNotificationService } from './happy-birthday.notification.service';
-import { INotification } from './interfaces/notification-factory.interface';
-import { LeaveBalanceNotificationService } from './leave-balance.notification.service';
-import { MonthlyPaymentSlipNotificationService } from './mothly-payment-slip.notification.service';
+import { AppsHappyBirthdayNotificationService } from './apps.happy-birthday.notification.service';
+import { INotification } from './interfaces/apps.notification-factory.interface';
+import { AppsLeaveBalanceNotificationService } from './apps.leave-balance.notification.service';
+import { AppsMonthlyPaymentSlipNotificationService } from './apps.mothly-payment-slip.notification.service';
 
 @Injectable()
-export class NotificationFactory {
+export class AppsNotificationFactory {
   constructor(
-    private readonly happyBirthdayService: HappyBirthdayNotificationService,
-    private readonly monthlyPaymentSlipService: MonthlyPaymentSlipNotificationService,
-    private readonly leaveBalanceService: LeaveBalanceNotificationService,
+    private readonly happyBirthdayService: AppsHappyBirthdayNotificationService,
+    private readonly monthlyPaymentSlipService: AppsMonthlyPaymentSlipNotificationService,
+    private readonly leaveBalanceService: AppsLeaveBalanceNotificationService,
   ) {
     this.notificationType = {
       [ENotificationType.HappyBirthday]: this.happyBirthdayService,

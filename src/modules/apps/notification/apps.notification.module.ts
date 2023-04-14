@@ -9,11 +9,11 @@ import {
 import { NotificationChannelModule } from 'src/modules/middleware/notification-channel/notification.channel.module';
 import { AppsNotificationController } from './controllers/apps.notification.controller';
 import { AppsUserNotificationController } from './controllers/apps.user-notification.controller';
-import { HappyBirthdayNotificationService } from './services/happy-birthday.notification.service';
-import { LeaveBalanceNotificationService } from './services/leave-balance.notification.service';
-import { MonthlyPaymentSlipNotificationService } from './services/mothly-payment-slip.notification.service';
-import { NotificationFactory } from './services/notification.factory';
-import { NotificationService } from './services/notification.service';
+import { AppsHappyBirthdayNotificationService } from './services/apps.happy-birthday.notification.service';
+import { AppsLeaveBalanceNotificationService } from './services/apps.leave-balance.notification.service';
+import { AppsMonthlyPaymentSlipNotificationService } from './services/apps.mothly-payment-slip.notification.service';
+import { AppsNotificationFactory } from './services/apps.notification.factory';
+import { AppsNotificationService } from './services/apps.notification.service';
 
 @Module({
   imports: [
@@ -25,11 +25,11 @@ import { NotificationService } from './services/notification.service';
     ]),
   ],
   providers: [
-    NotificationFactory,
-    HappyBirthdayNotificationService,
-    MonthlyPaymentSlipNotificationService,
-    LeaveBalanceNotificationService,
-    NotificationService,
+    AppsNotificationFactory,
+    AppsHappyBirthdayNotificationService,
+    AppsMonthlyPaymentSlipNotificationService,
+    AppsLeaveBalanceNotificationService,
+    AppsNotificationService,
     Logger,
   ],
   controllers: [AppsNotificationController, AppsUserNotificationController],

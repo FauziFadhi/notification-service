@@ -2,26 +2,28 @@ import { NotificationChannelModule } from '@modules/middleware/notification-chan
 import { InternalServerErrorException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ENotificationType } from '../notification.enum';
-import { HappyBirthdayNotificationService } from './happy-birthday.notification.service';
-import { LeaveBalanceNotificationService } from './leave-balance.notification.service';
-import { MonthlyPaymentSlipNotificationService } from './mothly-payment-slip.notification.service';
-import { NotificationFactory } from './notification.factory';
+import { AppsHappyBirthdayNotificationService } from './apps.happy-birthday.notification.service';
+import { AppsLeaveBalanceNotificationService } from './apps.leave-balance.notification.service';
+import { AppsMonthlyPaymentSlipNotificationService } from './apps.mothly-payment-slip.notification.service';
+import { AppsNotificationFactory } from './apps.notification.factory';
 
 describe('NotificationFactory', () => {
-  let notificationFactory: NotificationFactory;
+  let notificationFactory: AppsNotificationFactory;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
       imports: [NotificationChannelModule],
       providers: [
-        HappyBirthdayNotificationService,
-        LeaveBalanceNotificationService,
-        MonthlyPaymentSlipNotificationService,
-        NotificationFactory,
+        AppsHappyBirthdayNotificationService,
+        AppsLeaveBalanceNotificationService,
+        AppsMonthlyPaymentSlipNotificationService,
+        AppsNotificationFactory,
       ],
     }).compile();
 
-    notificationFactory = app.get<NotificationFactory>(NotificationFactory);
+    notificationFactory = app.get<AppsNotificationFactory>(
+      AppsNotificationFactory,
+    );
   });
 
   describe('setType', () => {
@@ -30,7 +32,7 @@ describe('NotificationFactory', () => {
         ENotificationType.HappyBirthday,
       );
 
-      expect(channel).toBeInstanceOf(HappyBirthdayNotificationService);
+      expect(channel).toBeInstanceOf(AppsHappyBirthdayNotificationService);
     });
 
     it('should return monthly payment slip notification Service when type is "monthly-payslip"', () => {
@@ -38,14 +40,14 @@ describe('NotificationFactory', () => {
         ENotificationType.MonthlyPayslip,
       );
 
-      expect(channel).toBeInstanceOf(MonthlyPaymentSlipNotificationService);
+      expect(channel).toBeInstanceOf(AppsMonthlyPaymentSlipNotificationService);
     });
     it('should return leave balance reminder notification Service when type is "leave-balance-reminder"', () => {
       const channel = notificationFactory.setType(
         ENotificationType.LeaveBalanceReminder,
       );
 
-      expect(channel).toBeInstanceOf(LeaveBalanceNotificationService);
+      expect(channel).toBeInstanceOf(AppsLeaveBalanceNotificationService);
     });
 
     it('should throw InternalServerErrorException when provided type is "invalid"', () => {
